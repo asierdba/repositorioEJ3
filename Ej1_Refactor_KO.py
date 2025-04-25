@@ -7,7 +7,7 @@ class Vuelo:
         self.destino = destino
         self.fecha = fecha
         self.hora_salida = salida
-        self.hora_salidallegada = llegada
+        self.hora_llegada = llegada
         self.precio = precio
 
 class Pasajero:
@@ -27,24 +27,26 @@ class Informacion:
 def mostrar_vuelos_disponibles(vuelos):
     print("Vuelos disponibles:")
     for vuelo in vuelos:
-        print(f"Número de vuelo: {vuelo.numero_vuelo}, Origen: {vuelo.origen}, Destino: {vuelo.destino}, Fecha: {vuelo.fecha}, Hora de salida: {vuelo.salida}, Hora de llegada: {vuelo.llegada}, Precio: {vuelo.precio}")
+        print(f"Número de vuelo: {vuelo.numero_vuelo}, Origen: {vuelo.origen}, Destino: {vuelo.destino}, Fecha: {vuelo.fecha}, Hora de salida: {vuelo.hora_salida}, Hora de llegada: {vuelo.hora_llegada}, Precio: {vuelo.precio}")
 
 def reservar_vuelo(vuelos, numero, pasajero, cantidad):
     for vuelo in vuelos:
-        if vuelo.numero_vuelo == numero:
-            if cantidad <= 0:
-                print("La cantidad de asientos debe ser mayor que cero.")
-                return
-            elif cantidad > 10:
-                print("Lo sentimos, no se pueden reservar más de 10 asientos por reserva.")
-                return
-            elif cantidad > 0 and cantidad <= 10:
+        if vuelo.numero_vuelo == numero and validar_cantidad(cantidad) == True:
                 reserva = Informacion(vuelo, pasajero, cantidad)
                 print(f"¡Reserva exitosa para el vuelo {vuelo.numero_vuelo}!")
                 print(f"Nombre del pasajero: {pasajero.nombre} {pasajero.apellido}, Asientos reservados: {cantidad}")
                 return
     print("No se encontró ningún vuelo con el número especificado.")
 
+def validar_cantidad(cantidad):
+    if cantidad <= 0:
+        print("La cantidad de asientos debe ser mayor que cero.")
+        return False
+    elif cantidad > 10:
+        print("Lo sentimos, no se pueden reservar más de 10 asientos por reserva.")
+        return False
+    else:
+        return True
 
 def datos_pasajero():
     nombre = input("Ingrese su nombre: ")
