@@ -29,10 +29,10 @@ def mostrar_vuelos_disponibles(vuelos):
     for vuelo in vuelos:
         print(f"Número de vuelo: {vuelo.numero_vuelo}, Origen: {vuelo.origen}, Destino: {vuelo.destino}, Fecha: {vuelo.fecha}, Hora de salida: {vuelo.salida}, Hora de llegada: {vuelo.llegada}, Precio: {vuelo.precio}")
 
-def reservar_vuelo(lista, numero_vuelo, pasajero, cantidad):
+def reservar_vuelo(vuelos, numero, pasajero, cantidad):
     
-    for v in lista:
-        if v.numero_vuelo == numero_vuelo:
+    for vuelo in vuelos:
+        if vuelo.numero_vuelo == numero:
             if cantidad <= 0:
                 print("La cantidad de asientos debe ser mayor que cero.")
                 return
@@ -40,8 +40,8 @@ def reservar_vuelo(lista, numero_vuelo, pasajero, cantidad):
                 print("Lo sentimos, no se pueden reservar más de 10 asientos por reserva.")
                 return
             elif cantidad > 0 and cantidad <= 10:
-                reserva = Informacion(v, pasajero, cantidad)
-                print(f"¡Reserva exitosa para el vuelo {v.numero_vuelo}!")
+                reserva = Informacion(vuelo, pasajero, cantidad)
+                print(f"¡Reserva exitosa para el vuelo {vuelo.numero_vuelo}!")
                 print(f"Nombre del pasajero: {pasajero.nombre} {pasajero.apellido}, Asientos reservados: {cantidad}")
                 return
     print("No se encontró ningún vuelo con el número especificado.")
